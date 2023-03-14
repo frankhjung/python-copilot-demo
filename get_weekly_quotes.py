@@ -15,7 +15,8 @@ import requests
 
 
 def get_alphavantage_key() -> str:
-    """Read Alpha Vantage key from environment variable.
+    """Get the Alpha Vantage API key from the environment variables.
+    The key is used to access the Alpha Vantage API.
 
     Returns:
         Alpha Vantage API key
@@ -44,7 +45,7 @@ def get_weekly_quotes(key: str, symbol: str) -> dict[Any, Any]:
         "symbol": symbol,
         "apikey": key,
     }
-    response = requests.get(url, params=params, timeout=5)
+    response = requests.get(url, params=params, timeout=5)  # 5 second timeout
     if response.status_code != 200:
         print(f"Error: status code {response.status_code}")
         sys.exit(1)
