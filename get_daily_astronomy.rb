@@ -31,7 +31,7 @@ def show_image(url)
   filename = url.split("/")[-1]
   # stream content from url into a file
   uri = URI(url)
-  Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+  Net::HTTP.start(uri.host, uri.port, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
     request = Net::HTTP::Get.new uri
     http.request request do |response|
       open filename, "wb" do |io|
