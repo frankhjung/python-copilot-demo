@@ -42,17 +42,17 @@ Compare with Google Finance:
 
 ## Resources
 
-- [Alpha Vantage API](https://www.alphavantage.co/documentation/)
-- [Pandas](https://pandas.pydata.org/)
-- [Matplotlib](https://matplotlib.org/)
-- [Python](https://www.python.org/)
+* [Alpha Vantage API](https://www.alphavantage.co/documentation/)
+* [Pandas](https://pandas.pydata.org/)
+* [Python](https://python.org)
+* [Matplotlib](https://matplotlib.org/)
 
 ## Other Tools
 
-- [GitHub Copilot Labs](https://githubnext.com/projects/copilot-labs) provides
+* [GitHub Copilot Labs](https://githubnext.com/projects/copilot-labs) provides
   additional Copilot features, including explain code, translate code, and write
   unit tests
 
-- [OpenAI playground](https://platform.openai.com/playground) is a research
+* [OpenAI playground](https://platform.openai.com/playground) is a research
   project to experiment with different pre-trained AI models developed by OpenAI
   in natural language processing (NLP), computer vision, and other AI domains
