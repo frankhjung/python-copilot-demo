@@ -4,18 +4,27 @@ A small Python program to demonstrate how to read stock quotes from [Alpha Vanta
 
 ## Method
 
-1. read ALPHAVANTAGE_API_KEY from environment variable
-2. call Alpha Vantage API to get stock quotes
-3. store stock quotes to a Pandas dataframe
-4. print to console
-5. plot stock quotes to a chart (closing price by date) using Matplotlib
+1. read stock symbol from the command line
+1. retrieve ALPHAVANTAGE_API_KEY from environment variable
+1. call Alpha Vantage API to get stock quotes
+1. store stock quotes to a Pandas dataframe
+1. print to console
+1. plot stock quotes to a chart (closing price by date) using Matplotlib
 
 ## Resources
 
+Software used in this project:
+
 * [Alpha Vantage API](https://www.alphavantage.co/documentation/)
-* [Pandas](https://pandas.pydata.org/)
-* [Python](https://python.org)
+* [Black](https://black.readthedocs.io/en/stable/)
+* [Flake8](https://flake8.pycqa.org/en/latest/)
+* [GNU Make](https://www.gnu.org/software/make/)
+* [isort](https://pycqa.github.io/isort/)
 * [Matplotlib](https://matplotlib.org/)
+* [Pandas](https://pandas.pydata.org/)
+* [PyLint](https://www.pylint.org/)
+* [PyTest](https://docs.pytest.org/en/stable/)
+* [Python](https://python.org)
 
 ## Other Tools
 

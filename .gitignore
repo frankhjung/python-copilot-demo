@@ -1,0 +1,9 @@
+*~
+*.bak
+*.pyc
+__pycache__/
+*.pyo
+.Python
+*.swp
+venv/
+.vscode/
