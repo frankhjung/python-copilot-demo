@@ -16,3 +16,13 @@ A small Python program to demonstrate how to read stock quotes from [Alpha Vanta
 * [Pandas](https://pandas.pydata.org/)
 * [Python](https://python.org)
 * [Matplotlib](https://matplotlib.org/)
+
+## Other Tools
+
+* [GitHub Copilot Labs](https://githubnext.com/projects/copilot-labs) provides
+  additional Copilot features, including explain code, translate code, and write
+  unit tests
+
+* [OpenAI playground](https://platform.openai.com/playground) is a research
+  project to experiment with different pre-trained AI models developed by OpenAI
+  in natural language processing (NLP), computer vision, and other AI domains
