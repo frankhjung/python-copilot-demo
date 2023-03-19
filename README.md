@@ -64,3 +64,6 @@ Software used in this project:
 * [OpenAI playground](https://platform.openai.com/playground) is a research
   project to experiment with different pre-trained AI models developed by OpenAI
   in natural language processing (NLP), computer vision, and other AI domains
+
+  * The [other](./other) directory contains example code where Copilot was used
+    to write a Python script, then Labs was used to translate into Ruby.
