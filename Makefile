@@ -57,6 +57,7 @@ lint:
 test:
 	# unit tests
 	pytest -v tests/
+ 
 run:
 	$(PYTHON) get_weekly_quotes.py MSFT
 
@@ -71,3 +72,4 @@ clean:
 	-$(RM) -v MANIFEST
 	-$(RM) -v **/*.pyc **/*.pyo **/*.py,cover
 	-$(RM) -v *.pyc *.pyo *.py,cover
+  
