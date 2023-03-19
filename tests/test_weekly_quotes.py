@@ -19,7 +19,8 @@ def test_get_alphavantage_key_returns_api_key_when_set() -> None:
 
 def test_get_alphavantage_key_returns_key_when_not_set() -> None:
     """Test get_alphavantage_key raises exception when key is not set."""
-    os.environ.pop("ALPHAVANTAGE_API_KEY")
+    if os.environ.get("ALPHAVANTAGE_API_KEY") is not None:
+        os.environ.pop("ALPHAVANTAGE_API_KEY")
     with pt.raises(KeyError):
         get_alphavantage_key()
 

@@ -40,6 +40,12 @@ Compare with Google Finance:
 
 ![Google Finance MSFT](./msft-google-finance.png)
 
+## Build
+
+This project was originally built locally using Python 3.11.2.
+
+GitHub only supports up to Python 3.10 in their workflows...
+
 ## Resources
 
 Software used in this project:
