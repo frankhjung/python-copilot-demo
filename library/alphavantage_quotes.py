@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import requests
 
+API_KEY = "ALPHAVANTAGE_API_KEY"
+
 
 def get_alphavantage_key() -> str:
     """
@@ -21,7 +23,7 @@ def get_alphavantage_key() -> str:
     KeyError
         If the API key is not set.
     """
-    return os.environ["ALPHAVANTAGE_API_KEY"]
+    return os.environ[API_KEY]
 
 
 def get_weekly_data(symbol: str, key: str) -> Dict[str, Dict[str, float]]:
@@ -74,7 +76,7 @@ def get_weekly_quotes(data: Dict[str, Dict[str, float]]) -> Dict[str, float]:
     return data["Weekly Time Series"]
 
 
-def convert_to_dataframe(weekly_quotes: Dict[str, float]) -> pd.DataFrame:
+def weekly_to_dataframe(weekly_quotes: Dict[str, float]) -> pd.DataFrame:
     """
     Convert a dictionary of weekly quotes into a pandas dataframe.
 

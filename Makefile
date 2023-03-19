@@ -57,6 +57,7 @@ lint:
 test:
 	# unit tests
 	pytest -v tests/
+
 run:
 	$(PYTHON) get_weekly_quotes.py MSFT
 
