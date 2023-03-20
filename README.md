@@ -34,11 +34,11 @@ stock quotes using the [Alpha Vantage](https://www.alphavantage.co/) API.
 
 ## MSFT Stock Quote
 
-![Alpha Vantage MSFT](./msft-alpha-vantage.png)
+![Alpha Vantage MSFT](doc/msft-alpha-vantage.png)
 
 Compare with Google Finance:
 
-![Google Finance MSFT](./msft-google-finance.png)
+![Google Finance MSFT](doc/msft-google-finance.png)
 
 ## Build
 
