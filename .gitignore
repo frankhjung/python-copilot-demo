@@ -1,9 +1,10 @@
-*~
+__pycache__/
+.env
+.Python
+.vscode/
 *.bak
 *.pyc
-__pycache__/
 *.pyo
-.Python
 *.swp
+*~
 venv/
-.vscode/
