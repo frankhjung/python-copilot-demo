@@ -5,9 +5,11 @@
 Get weekly quotes from Alpha Vantage API.
 """
 
+import os
 import sys
 
-import library.alphavantage_quotes as aq
+import library.alpha_vantage_service as avs
+import library.weekly_quotes as wq
 
 
 def main() -> None:
@@ -20,18 +22,19 @@ def main() -> None:
     symbol = sys.argv[1]
     # get API key from environment
     try:
-        key = aq.get_alphavantage_key()
+        key = os.environ["ALPHAVANTAGE_API_KEY"]
     except KeyError:
-        print(f"Error: {aq.API_KEY} not set")
+        print("Error: ALPHAVANTAGE_API_KEY not set")
         sys.exit(1)
-    # retrieve weekly quotes from Alpha Vantage API
-    data = aq.get_weekly_data(symbol, key)
-    # get weekly quotes and convert to dataframe
-    weekly_quotes = aq.get_weekly_quotes(data)
-    quotes_df = aq.weekly_to_dataframe(weekly_quotes)
-    print(quotes_df)
-    # plot weekly quotes
-    aq.plot_weekly_quotes(symbol, quotes_df)
+    # get weekly quotes
+    service = avs.AlphaVantageService(key)
+    data = service.get_weekly_data(symbol)
+    # load data into WeeklyQuotes object
+    quotes = wq.WeeklyQuotes(data)
+    # print quotes dataframe
+    print(quotes.weekly_to_dataframe())
+    # plot quotes
+    quotes.plot(symbol)
 
 
 if __name__ == "__main__":
