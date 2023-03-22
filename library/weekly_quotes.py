@@ -9,7 +9,7 @@ import pandas as pd
 class WeeklyQuotes:
     """Custom class to hold weekly quotes."""
 
-    def __init__(self, data):
+    def __init__(self, data: Dict[str, Dict[str, float]]):
         """Initialize the class."""
         self.data = data
         self.quotes = self.get_weekly_quotes()
@@ -45,7 +45,7 @@ class WeeklyQuotes:
         Parameters
         ----------
         symbol : str
-            A stock symbol.
+            A stock symbol to add to plot title.
         """
         self.quotes_df["close"].plot()
         plt.title(f"Weekly Quotes for {symbol}")

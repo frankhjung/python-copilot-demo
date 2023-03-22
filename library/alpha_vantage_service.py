@@ -9,16 +9,15 @@ from library.weekly_data_service import WeeklyDataService
 
 
 class AlphaVantageService(WeeklyDataService):
-    """
-    An implementation of the weekly data service.
-
-    Parameters
-    ----------
-    key : str
-        The Alpha Vantage API key.
-    """
+    """An implementation of the weekly data service."""
 
     def __init__(self, key: str) -> None:
+        """
+        Parameters
+        ----------
+        key : str
+            The Alpha Vantage API key.
+        """
         self.key = key
 
     def get_weekly_data(self, symbol: str) -> Dict[str, Dict[str, float]]:
