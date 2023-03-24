@@ -1,4 +1,4 @@
-"""Get weekly quotes for a symbol using Alpha Vantage API."""
+"""Abstract service class to retrieve weekly quotes for a stock symbol."""
 # pylint: disable=too-few-public-methods
 
 from abc import ABC, abstractmethod
@@ -16,7 +16,7 @@ class WeeklyDataService(ABC):
     """
 
     @abstractmethod
-    def get_weekly_data(self, symbol: str) -> Dict[str, Dict[str, float]]:
+    def retrieve_weekly_data(self, symbol: str) -> Dict[str, Dict[str, float]]:
         """
         Abstract class to get weekly quotes for a symbol.
 

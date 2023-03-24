@@ -22,7 +22,7 @@ stock quotes using the [Alpha Vantage](https://www.alphavantage.co/) API.
 1999-11-26   89.620   93.37   88.37   91.12  121834600.0
 1999-12-03   90.120   97.12   89.50   96.12  142022200.0
 1999-12-10   95.250   97.19   91.44   93.87  115003700.0
-...             ...     ...     ...     ...          ...
+    …          …        …       …       …             …
 2023-02-10  257.440  276.76  254.78  263.10  196239002.0
 2023-02-17  267.640  274.97  256.00  258.06  170244679.0
 2023-02-24  254.480  256.84  248.10  249.22  105098500.0
@@ -34,17 +34,17 @@ stock quotes using the [Alpha Vantage](https://www.alphavantage.co/) API.
 
 ## MSFT Stock Quote
 
-![Alpha Vantage MSFT](doc/msft-alpha-vantage.png)
+![Alpha Vantage MSFT](docs/msft-alpha-vantage.png)
 
 Compare with Google Finance:
 
-![Google Finance MSFT](doc/msft-google-finance.png)
+![Google Finance MSFT](docs/msft-google-finance.png)
 
 ## Build
 
 This project was originally built locally using Python 3.11.2.
 
-GitHub only supports up to Python 3.10 in their workflows...
+GitHub only supports up to Python 3.10 in their workflows…
 
 ## Resources
 

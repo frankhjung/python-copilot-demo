@@ -5,7 +5,7 @@ from typing import Dict
 import pandas as pd
 import pytest as pt
 
-import library.weekly_quotes as wq
+import quotes.weekly_quotes as wq
 
 
 @pt.fixture(scope="module", name="mock_quotes")
@@ -49,7 +49,7 @@ def fixture_expected_df() -> pd.DataFrame:
 def test_convert_to_dataframe(
     mock_quotes: Dict[str, float], expected_df: pd.DataFrame
 ) -> None:
-    """Test convert_to_dataframe()."""
+    """Get weekly time series and convert to dataframe."""
     quotes = wq.WeeklyQuotes(mock_quotes)  # type: ignore
-    quotes_df = quotes.weekly_to_dataframe()
+    quotes_df = quotes.as_dataframe()
     pd.testing.assert_frame_equal(quotes_df, expected_df, check_like=True)

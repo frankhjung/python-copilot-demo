@@ -1,4 +1,4 @@
-"""Custom class to hold weekly quotes."""
+"""Retreive weekly quotes and plot."""
 
 from typing import Dict
 
@@ -13,7 +13,7 @@ class WeeklyQuotes:
         """Initialize the class."""
         self.data = data
         self.quotes = self.get_weekly_quotes()
-        self.quotes_df = self.weekly_to_dataframe()
+        self.quotes_df = self.as_dataframe()
 
     def get_weekly_quotes(self) -> Dict[str, float]:
         """Get weekly quotes for a symbol returned by the Alpha Vantage API.
@@ -25,7 +25,7 @@ class WeeklyQuotes:
         """
         return self.data["Weekly Time Series"]
 
-    def weekly_to_dataframe(self) -> pd.DataFrame:
+    def as_dataframe(self) -> pd.DataFrame:
         """Convert a dictionary of weekly quotes into a pandas dataframe.
 
         Returns
@@ -34,7 +34,7 @@ class WeeklyQuotes:
             The dataframe representation of the weekly quotes.
         """
         quotes_df = pd.DataFrame(self.quotes).T
-        quotes_df.index = pd.to_datetime(quotes_df.index)
+        quotes_df.index = pd.to_datetime(quotes_df.index)  # type: ignore
         quotes_df.columns = ["open", "high", "low", "close", "volume"]
         quotes_df = quotes_df.apply(pd.to_numeric)
         return quotes_df

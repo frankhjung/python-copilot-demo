@@ -1,11 +1,11 @@
-"""Get weekly quotes for a symbol using Alpha Vantage API."""
+"""Service to get weekly quotes from Alpha Vantage."""
 # pylint: disable=too-few-public-methods
 
 from typing import Dict
 
 import requests
 
-from library.weekly_data_service import WeeklyDataService
+from quotes.weekly_data_service import WeeklyDataService
 
 
 class AlphaVantageService(WeeklyDataService):
@@ -20,7 +20,7 @@ class AlphaVantageService(WeeklyDataService):
         """
         self.key = key
 
-    def get_weekly_data(self, symbol: str) -> Dict[str, Dict[str, float]]:
+    def retrieve_weekly_data(self, symbol: str) -> Dict[str, Dict[str, float]]:
         """
         Get weekly quotes for a symbol using Alpha Vantage API.
 

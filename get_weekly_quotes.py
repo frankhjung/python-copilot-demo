@@ -1,22 +1,20 @@
 #!/usr/bin/env python3
-# pylint: disable=invalid-name
 
-"""
-Get weekly quotes from Alpha Vantage API.
-"""
+"""Retrieve and plot weekly quotes for stock using Alpha Vantage API."""
 
 import os
 import sys
 
-import library.alpha_vantage_service as avs
-import library.weekly_quotes as wq
+import quotes.alpha_vantage_service as avs
+import quotes.weekly_quotes as wq
 
 
 def main() -> None:
     """Main function."""
     # check command line arguments
     if len(sys.argv) != 2:
-        print("Usage: get_weekly_quotes.py SYMBOL")
+        print(f"Usage: {os.path.basename(__file__)} SYMBOL")
+        # print(f"Usage: {os.path.basename(sys.argv[0])} SYMBOL")
         sys.exit(0)
     # get symbol from command line
     symbol = sys.argv[1]
@@ -28,11 +26,11 @@ def main() -> None:
         sys.exit(1)
     # get weekly quotes
     service = avs.AlphaVantageService(key)
-    data = service.get_weekly_data(symbol)
+    data = service.retrieve_weekly_data(symbol)
     # load data into WeeklyQuotes object
     quotes = wq.WeeklyQuotes(data)
     # print quotes dataframe
-    print(quotes.weekly_to_dataframe())
+    print(quotes.as_dataframe())
     # plot quotes
     quotes.plot(symbol)
 

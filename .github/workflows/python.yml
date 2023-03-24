@@ -40,10 +40,10 @@ jobs:
 
       - name: check
         run: |
-          isort --check --diff *.py library/*.py tests/*.py
-          black --check *.py library/*.py tests/*.py
-          flake8 --statistics --count *.py library/*.py tests/*.py
-          pylint *.py library/*.py tests/*.py
+          isort --check --diff *.py **/*.py
+          black --check *.py **/*.py
+          flake8 --statistics --count *.py **/*.py
+          pylint *.py **/*.py
 
       - name: tests
         run: |
