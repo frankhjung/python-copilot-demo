@@ -1,6 +1,9 @@
 *~
 *.bak
+.coverage
 .env
+html/
+.idea/
 *.pyc
 __pycache__/
 *.pyo

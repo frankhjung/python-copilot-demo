@@ -15,6 +15,13 @@ on:   # yamllint disable-line rule:truthy
   pull_request:
     branches: ["main", "demo*", "feature*"]
 
+permissions:
+  deployments: write
+  contents: write
+  statuses: write
+  actions: write
+  checks: read
+
 jobs:
 
   build:
@@ -37,16 +44,34 @@ jobs:
           black --version
           flake8 --version
           pylint --version
+          pdoc --version | grep pdoc
 
       - name: check
         run: |
           isort --check --diff *.py **/*.py
           black --check *.py **/*.py
           flake8 --statistics --count *.py **/*.py
+          sort-requirements --check requirements.txt
           pylint *.py **/*.py
 
       - name: tests
         run: |
-          pytest -v tests
+          pytest --verbose \
+                 --html=html/unittests.html \
+                 --self-contained-html \
+                 --cov-report=html \
+                 --cov=quotes
+          # python get_weekly_quotes.py MSFT
         env:
           ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+
+      - name: docs
+        run: |
+          pdoc quotes -o html/
+
+      - name: publish
+        uses: JamesIves/github-pages-deploy-action@v4
+        if: success()
+        with:
+          branch: gh-pages
+          folder: html
