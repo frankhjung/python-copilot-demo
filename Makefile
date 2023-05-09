@@ -13,6 +13,7 @@ LINE_LENGTH	:= 79	# PEP-8 Standards suggest a line-length of 79
 			# so we ensure the styling tools all follow this
 
 all:	preen test doc run
+default: check test
 
 help:
 	@echo
