@@ -22,7 +22,7 @@ def main() -> None:
     try:
         key = os.environ["ALPHAVANTAGE_API_KEY"]
     except KeyError:
-        print("Error: ALPHAVANTAGE_API_KEY not set")
+        print("Error: ALPHAVANTAGE_API_KEY not set", file=sys.stderr)
         sys.exit(1)
     # get weekly quotes
     service = avs.AlphaVantageService(key)
