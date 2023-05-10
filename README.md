@@ -48,18 +48,23 @@ GitHub only supports up to Python 3.10 in their workflows…
 
 ## Resources
 
+Python documentation is
+[here](https://frankhjung.github.io/python-copilot-demo/).
+
 Software used in this project:
 
 * [Alpha Vantage API](https://www.alphavantage.co/documentation/)
 * [Black](https://black.readthedocs.io/en/stable/)
 * [Flake8](https://flake8.pycqa.org/en/latest/)
-* [GNU Make](https://www.gnu.org/software/make/)
 * [isort](https://pycqa.github.io/isort/)
+* [Make](https://www.gnu.org/software/make/)
 * [Matplotlib](https://matplotlib.org/)
 * [Pandas](https://pandas.pydata.org/)
+* [PyDoc](https://pypi.org/project/pdoc/)
 * [PyLint](https://www.pylint.org/)
 * [PyTest](https://docs.pytest.org/en/stable/)
 * [Python](https://python.org)
+* [sort-requirements](https://pypi.org/project/sort-requirements/)
 
 ## Other Tools
 
@@ -73,3 +78,6 @@ Software used in this project:
 
   * The [other](./other) directory contains example code where Copilot was used
     to write a Python script, then Labs was used to translate into Ruby.
+
+* [Hugging Face StarCoder](https://huggingface.co/blog/starcoder) is a LLM model
+  released by Hugging Face specifically for code generation.

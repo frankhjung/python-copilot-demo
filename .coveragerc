@@ -1,0 +1,15 @@
+[html]
+directory = html/test-coverage
+
+[paths]
+source =
+    quotes/
+
+[report]
+ignore_errors = True
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    # ignore pragma
+    pragma: no cover
+    # ignore main
+    if __name__ == .__main__.:
