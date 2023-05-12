@@ -81,3 +81,6 @@ Software used in this project:
 
 * [Hugging Face StarCoder](https://huggingface.co/blog/starcoder) is a LLM model
   released by Hugging Face specifically for code generation.
+
+* [Hugging Face Code Search](https://huggingface.co/spaces/bigcode/search) is a
+  search engine for code, trained on 2.8M Python files from GitHub.
