@@ -13,7 +13,7 @@ def main() -> None:
     """Main function."""
     # check command line arguments
     if len(sys.argv) != 2:
-        print(f"Usage: {os.path.basename(__file__)} SYMBOL")
+        print(f"Usage: {os.path.basename(__file__)} SYMBOL", file=sys.stderr)
         # print(f"Usage: {os.path.basename(sys.argv[0])} SYMBOL")
         sys.exit(0)
     # get symbol from command line
