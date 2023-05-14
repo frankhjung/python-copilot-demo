@@ -2,15 +2,15 @@
 
 .PHONY: all clean default doc format help lint preen run tags test
 
-.DEFAULT_GOAL	:= test
+.DEFAULT_GOAL	:= default
 CTAGS		:= $(shell which ctags)
 PIP		:= $(shell which pip3)
 PYTHON		:= $(shell which python3)
+LINE_LENGTH	:= 79	# PEP-8 standards ensure styling tools use this too
+#CODE_COVERAGE	:= 90	# minimum percentage for code coverage
 
 PROJECT		:= quotes
 SRCS		:= $(wildcard *.py $(PROJECT)/*.py tests/*.py)
-LINE_LENGTH	:= 79	# PEP-8 Standards suggest a line-length of 79
-			# so we ensure the styling tools all follow this
 
 all:	preen test doc run
 default: check test
