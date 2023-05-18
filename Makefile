@@ -27,13 +27,13 @@ help:
 	@echo "  docs:   document module"
 	@echo "  clean:  delete all generated files"
 	@echo
-	@echo "Initialise virtual environment (venv) with:"
+	@echo "Initialise virtual environment (.venv) with:"
 	@echo
-	@echo "  pip3 install -U virtualenv; python3 -m virtualenv venv; source venv/bin/activate; pip3 install -Ur requirements.txt"
+	@echo "  pip3 install -U virtualenv; python3 -m virtualenv .venv; source .venv/bin/activate; pip3 install -Ur requirements.txt"
 	@echo
-	@echo "Start virtual environment (venv) with:"
+	@echo "Start virtual environment (.venv) with:"
 	@echo
-	@echo "  source venv/bin/activate"
+	@echo "  source .venv/bin/activate"
 	@echo
 	@echo "Deactivate with:"
 	@echo
@@ -85,5 +85,5 @@ clean:
 
 cleanall: clean
 	# clean development environment
-	$(RM) -r venv/
+	$(RM) -r .venv/
 	$(RM) -r .idea/
