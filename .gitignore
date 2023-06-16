@@ -4,6 +4,7 @@
 .env
 html/
 .idea/
+public/
 *.pyc
 __pycache__/
 *.pyo
