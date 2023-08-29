@@ -10,5 +10,6 @@ __pycache__/
 *.pyo
 .Python
 *.swp
+setkey.sh
 venv/
 .vscode/

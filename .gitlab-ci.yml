@@ -14,7 +14,7 @@ stages:
   - deploy
 
 validate:
-  image: python:3.10-slim
+  image: python:3.11-slim
   stage: validate
   variables:
     PROJECT: quotes

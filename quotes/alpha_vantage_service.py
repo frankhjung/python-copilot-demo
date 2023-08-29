@@ -42,5 +42,7 @@ class AlphaVantageService(WeeklyDataService):
         }
         response = requests.get(url, params=params, timeout=5)
         if not response.ok:
-            raise RuntimeError(f"Error: {response.status_code}")
+            raise RuntimeError(
+                f"Error: {response.status_code} {response.reason}"
+            )
         return response.json()

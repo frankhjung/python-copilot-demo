@@ -1,0 +1,5 @@
+[BASIC]
+docstring-min-length=4          # includes function signature line(s)
+
+[MASTER]
+load-plugins=pylint_report
