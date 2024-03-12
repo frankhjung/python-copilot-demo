@@ -1,4 +1,5 @@
 """Service to get weekly quotes from Alpha Vantage."""
+
 # pylint: disable=too-few-public-methods
 
 from typing import Dict

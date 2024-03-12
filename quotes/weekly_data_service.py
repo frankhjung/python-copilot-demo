@@ -1,4 +1,5 @@
 """Abstract service class to retrieve weekly quotes for a stock symbol."""
+
 # pylint: disable=too-few-public-methods
 
 from abc import ABC, abstractmethod
