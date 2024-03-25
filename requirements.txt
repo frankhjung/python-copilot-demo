@@ -1,6 +1,6 @@
 anybadge          ~= 1.14
 bandit            ~= 1.7
-black             ~= 23.3
+black             ~= 24.3.0
 flake8            ~= 6.0
 genbadge[all]     ~= 1.1
 isort             ~= 5.12

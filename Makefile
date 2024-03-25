@@ -45,9 +45,9 @@ preen:	format tags lint
 
 format:
 	# sort imports
-	@isort --verbose --line-length $(LINE_LENGTH) --profile black $(PROJECT)
+	@isort --line-length $(LINE_LENGTH) --profile black $(PROJECT)
 	# format code to googles style
-	@black --verbose --line-length $(LINE_LENGTH) $(PROJECT)
+	@black --line-length $(LINE_LENGTH) $(PROJECT)
 	# sort requirements
 	@sort-requirements requirements.txt
 
@@ -59,11 +59,11 @@ endif
 
 lint:
 	# check with flake8
-	@flake8 --verbose $(PROJECT)
+	@flake8 $(PROJECT)
 	# lint with pylint
-	@pylint --verbose $(PROJECT)
+	@pylint $(PROJECT)
 	# security checks with bandit
-	@bandit --verbose --configfile .bandit.yaml --recursive $(PROJECT)
+	@bandit --configfile .bandit.yaml --recursive $(PROJECT)
 
 test:
 	# unit tests with coverage report
@@ -113,7 +113,9 @@ clean:
 	$(RM) public/
 	$(RM) tags
 
-cleanall: clean
+distclean: clean
 	# clean development environment
 	$(RM) .idea/
 	$(RM) .venv/
+	$(RM) .vscode/
+
