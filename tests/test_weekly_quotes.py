@@ -1,13 +1,15 @@
-"""Test weekly_alpha_vantage module."""
+"""Test weekly quotes module."""
+
+from typing import Any
 
 import pandas as pd
-import pytest as pt
+import pytest
 
 import quotes.weekly_quotes as wq
 
 
-@pt.fixture(scope="module", name="mock_quotes")
-def fixture_mock_quotes() -> dict[str, dict[str, float]]:
+@pytest.fixture(scope="module", name="mock_quotes")
+def fixture_mock_quotes() -> dict[str, Any]:
     """Fixture: Mock weekly quotes."""
     return {
         "Meta Data": {
@@ -34,22 +36,30 @@ def fixture_mock_quotes() -> dict[str, dict[str, float]]:
                 "5. volume": 100.0,
             },
         },
-    }  # type: ignore
+    }
 
 
-@pt.fixture(scope="module", name="expected_df")
+@pytest.fixture(scope="module", name="expected_df")
 def fixture_expected_df() -> pd.DataFrame:
     """Fixture: Mock dataframe with weekly quotes."""
-    data = [[1.0, 2.0, 3.0, 4.0, 100.0], [5.0, 6.0, 7.0, 8.0, 100.0]]
+    data = [
+        [1.0, 2.0, 3.0, 4.0, 100.0],
+        [5.0, 6.0, 7.0, 8.0, 100.0],
+    ]
     index = pd.date_range("20210207", periods=2, freq="W")
     columns = ["open", "high", "low", "close", "volume"]
     return pd.DataFrame(data=data, index=index, columns=columns)
 
 
 def test_convert_to_dataframe(
-    mock_quotes: dict[str, float], expected_df: pd.DataFrame
+    mock_quotes: dict[str, Any],
+    expected_df: pd.DataFrame,
 ) -> None:
     """Get weekly time series and convert to dataframe."""
-    quotes = wq.WeeklyQuotes(mock_quotes)  # type: ignore
+    quotes = wq.WeeklyQuotes(mock_quotes)
     quotes_df = quotes.as_dataframe()
-    pd.testing.assert_frame_equal(quotes_df, expected_df, check_like=True)
+    pd.testing.assert_frame_equal(
+        quotes_df,
+        expected_df,
+        check_like=True,
+    )

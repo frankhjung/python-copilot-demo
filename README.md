@@ -25,7 +25,7 @@ Run formatting, linting, and tests:
 
 ```bash
 make            # format, lint, and test (default)
-make all        # format, lint, test, docs, badge, and run
+make all        # format, lint, test, docs, and run
 ```
 
 Individual targets:
@@ -35,7 +35,7 @@ make format     # format code and sort imports
 make lint       # lint with ruff and bandit
 make test       # run unit tests with coverage
 make doc        # generate documentation
-make badge      # generate badges
+
 make run        # get quotes for MSFT
 make clean      # remove generated artefacts
 ```

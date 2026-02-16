@@ -1,6 +1,6 @@
 #!/usr/bin/env make
 
-.PHONY: all badge clean default doc format help lint preen report run tags test
+.PHONY: all clean default doc format help lint preen report run tags test
 
 .DEFAULT_GOAL	:= default
 CTAGS		:= $(shell which ctags)
@@ -22,6 +22,7 @@ help:
 	@echo "  lint:   check code"
 	@echo "  test:   run unit tests"
 	@echo "  doc:    document module"
+
 	@echo "  clean:  delete all generated files"
 	@echo
 	@echo "Initialise virtual environment with:"
@@ -57,7 +58,7 @@ test:
 	@uv run pytest --verbose --cov --cov-report=html \
 	  --html=public/pytest_report.html
 
-report:	doc badge
+report:	doc
 
 doc:
 	# generate documentation to public directory
@@ -65,26 +66,7 @@ doc:
 	@uv run bandit --configfile pyproject.toml --recursive \
 	  --format html --output public/bandit_report.html $(PROJECT)
 
-badge:
-	# generate badges
-	# ruff
-	@uv run ruff check --exit-zero --output-format json \
-	  --output-file public/ruff_report.json $(PROJECT)
-	@uv run python -c "\
-	  import json, sys; \
-	  data = json.load(open('public/ruff_report.json')); \
-	  count = len(data); \
-	  print(f'ruff: {count} issues'); \
-	  import anybadge; \
-	  badge = anybadge.Badge('ruff', \
-	    value='pass' if count == 0 else f'{count} issues', \
-	    default_color='green' if count == 0 else 'orange'); \
-	  badge.write_badge('public/ruff.svg', overwrite=True)"
-	# pytest
-	@uv run pytest --junitxml=public/pytest_report.xml
-	@uv run genbadge tests \
-	  --input-file public/pytest_report.xml \
-	  --output-file public/tests.svg
+
 
 run:
 	# get quotes for microsoft

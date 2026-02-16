@@ -1,0 +1,22 @@
+# Task: Generic Stock Quotes Service
+
+- [x] Fix type mismatch in `quotes/weekly_quotes.py`
+  - [x] Run mypy to confirm error
+  - [x] Update type hints for raw API data to `dict[str, Any]`
+  - [x] Verify fix with mypy
+  - [x] Verify using `make` targets
+- [x] Ensure consistent Australian English spelling in documentation
+- [x] Fix `IndentationError` in `Makefile` badge generation
+  - [x] Create `scripts/generate_ruff_badge.py`
+  - [x] Update `Makefile` to use script
+  - [x] Verify `make all` passes
+- [x] Fix `mypy` missing stub warnings
+  - [x] Add `pandas-stubs` to `pyproject.toml`
+  - [x] Verify `mypy` passes
+- [x] Remove badge generation
+  - [x] Remove `badge` target from `Makefile`
+  - [x] Delete `scripts/generate_ruff_badge.py`
+  - [x] Remove badge dependencies from `pyproject.toml`
+  - [x] Remove badge references from `README.md` (if any)
+  - [x] Verify `make all` runs without badges
+- [x] Create walkthrough documenting the fix

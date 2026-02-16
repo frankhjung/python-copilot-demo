@@ -10,28 +10,29 @@ import quotes.weekly_quotes as wq
 
 
 def main() -> None:
-    """Main function."""
-    # check command line arguments
+    """Retrieve, display, and plot weekly stock quotes."""
     if len(sys.argv) != 2:
-        print(f"Usage: {os.path.basename(__file__)} SYMBOL", file=sys.stderr)
-        # print(f"Usage: {os.path.basename(sys.argv[0])} SYMBOL")
+        print(
+            f"Usage: {os.path.basename(__file__)} SYMBOL",
+            file=sys.stderr,
+        )
         sys.exit(0)
-    # get symbol from command line
+
     symbol = sys.argv[1]
-    # get API key from environment
-    try:
-        key = os.environ["ALPHAVANTAGE_API_KEY"]
-    except KeyError:
-        print("Error: ALPHAVANTAGE_API_KEY not set", file=sys.stderr)
+
+    key = os.environ.get("ALPHAVANTAGE_API_KEY")
+    if key is None:
+        print(
+            "Error: ALPHAVANTAGE_API_KEY not set",
+            file=sys.stderr,
+        )
         sys.exit(1)
-    # get weekly quotes
+
+    # retrieve → extract → convert → display
     service = avs.AlphaVantageService(key)
     data = service.retrieve_weekly_data(symbol)
-    # load data into WeeklyQuotes object
     quotes = wq.WeeklyQuotes(data)
-    # print quotes dataframe
     print(quotes.as_dataframe())
-    # plot quotes
     quotes.plot(symbol)
 
 

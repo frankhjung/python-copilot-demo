@@ -1,6 +1,6 @@
 """Service to get weekly quotes from Alpha Vantage."""
 
-# pylint: disable=too-few-public-methods
+from typing import Any
 
 import requests
 
@@ -11,17 +11,21 @@ class AlphaVantageService(WeeklyDataService):
     """An implementation of the weekly data service."""
 
     def __init__(self, key: str) -> None:
-        """
+        """Initialise with an Alpha Vantage API key.
+
         Parameters
         ----------
         key : str
             The Alpha Vantage API key.
+
         """
         self.key = key
 
-    def retrieve_weekly_data(self, symbol: str) -> dict[str, dict[str, float]]:
-        """
-        Get weekly quotes for a symbol using Alpha Vantage API.
+    def retrieve_weekly_data(
+        self,
+        symbol: str,
+    ) -> dict[str, Any]:
+        """Get weekly quotes for a symbol using Alpha Vantage API.
 
         Parameters
         ----------
@@ -30,8 +34,9 @@ class AlphaVantageService(WeeklyDataService):
 
         Returns
         -------
-        Dict[str, Dict[str, float]]
+        dict[str, dict[str, float]]
             A dictionary with the weekly quotes for the symbol.
+
         """
         url = "https://www.alphavantage.co/query"
         params = {
@@ -41,7 +46,6 @@ class AlphaVantageService(WeeklyDataService):
         }
         response = requests.get(url, params=params, timeout=5)
         if not response.ok:
-            raise RuntimeError(
-                f"Error: {response.status_code} {response.reason}"
-            )
+            msg = f"Error: {response.status_code} {response.reason}"
+            raise RuntimeError(msg)
         return response.json()

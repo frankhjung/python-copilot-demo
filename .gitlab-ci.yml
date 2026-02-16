@@ -25,34 +25,20 @@ validate:
     - uv run ruff version
   script:
     # check source code formatting and linting
+    - mkdir -p public
     - uv run ruff check ${PROJECT}
     - uv run ruff format --check ${PROJECT}
     # security checks
     - uv run bandit --configfile pyproject.toml --recursive
       --format html --output public/bandit_report.html
       ${PROJECT}
-    # pdoc creates the public directory
     - uv run pdoc --output-directory public ${PROJECT}
     # unit tests and coverage
     - uv run pytest
       --cov --cov-report=html --cov-report=xml
       --html=public/pytest_report.html
       --junitxml=public/pytest_report.xml
-    - uv run genbadge tests
-      --input-file public/pytest_report.xml
-      --output-file public/tests.svg
-    # ruff badge
-    - uv run ruff check --exit-zero --output-format json
-      --output-file public/ruff_report.json ${PROJECT}
-    # yamllint disable-line rule:line-length
-    - uv run python -c "
-      import json, anybadge;
-      data = json.load(open('public/ruff_report.json'));
-      count = len(data);
-      badge = anybadge.Badge('ruff',
-      value='pass' if count == 0 else f'{count} issues',
-      default_color='green' if count == 0 else 'orange');
-      badge.write_badge('public/ruff.svg', overwrite=True)"
+
   coverage: /(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/
   artifacts:
     paths:

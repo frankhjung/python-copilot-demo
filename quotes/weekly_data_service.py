@@ -1,24 +1,22 @@
-"""Abstract service class to retrieve weekly quotes for a stock symbol."""
+"""Service protocol for retrieving weekly stock quotes."""
 
-# pylint: disable=too-few-public-methods
-
-from abc import ABC, abstractmethod
+from typing import Any, Protocol, runtime_checkable
 
 
-class WeeklyDataService(ABC):
-    """
-    An interface for getting weekly data.
+@runtime_checkable
+class WeeklyDataService(Protocol):
+    """Protocol for weekly data retrieval services.
 
-    Raises
-    ------
-    RuntimeError
-        If the API call fails.
+    Implementations should raise ``RuntimeError`` if the API
+    call fails.
+
     """
 
-    @abstractmethod
-    def retrieve_weekly_data(self, symbol: str) -> dict[str, dict[str, float]]:
-        """
-        Abstract class to get weekly quotes for a symbol.
+    def retrieve_weekly_data(
+        self,
+        symbol: str,
+    ) -> dict[str, Any]:
+        """Retrieve weekly quotes for a stock symbol.
 
         Parameters
         ----------
@@ -27,7 +25,8 @@ class WeeklyDataService(ABC):
 
         Returns
         -------
-        Dict[str, Dict[str, float]]
+        dict[str, dict[str, float]]
             A dictionary with the weekly quotes for the symbol.
+
         """
-        raise NotImplementedError
+        ...
