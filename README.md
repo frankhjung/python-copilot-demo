@@ -1,7 +1,50 @@
 # Read Stock Quotes Example
 
-Use GitHub Copilot to write a small Python program to demonstrate how to read
-stock quotes using the [Alpha Vantage](https://www.alphavantage.co/) API.
+Use GitHub Copilot to write a small Python program to demonstrate
+how to read stock quotes using the
+[Alpha Vantage](https://www.alphavantage.co/) API.
+
+## Quick Start
+
+### Prerequisites
+
+- [uv](https://docs.astral.sh/uv/) — Python package and project
+  manager
+
+### Setup
+
+Install dependencies and create a virtual environment:
+
+```bash
+uv sync
+```
+
+### Build and Test
+
+Run formatting, linting, and tests:
+
+```bash
+make            # format, lint, and test (default)
+make all        # format, lint, test, docs, badge, and run
+```
+
+Individual targets:
+
+```bash
+make format     # format code and sort imports
+make lint       # lint with ruff and bandit
+make test       # run unit tests with coverage
+make doc        # generate documentation
+make badge      # generate badges
+make run        # get quotes for MSFT
+make clean      # remove generated artefacts
+```
+
+### Running Directly
+
+```bash
+uv run python get_weekly_quotes.py MSFT
+```
 
 ## Method
 
@@ -10,7 +53,8 @@ stock quotes using the [Alpha Vantage](https://www.alphavantage.co/) API.
 1. call Alpha Vantage API to get stock quotes
 1. store stock quotes to a Pandas dataframe
 1. print to console
-1. plot stock quotes to a chart (closing price by date) using Matplotlib
+1. plot stock quotes to a chart (closing price by date)
+   using Matplotlib
 
 ## Example
 
@@ -42,45 +86,55 @@ Compare with Google Finance:
 
 ## Build
 
-This project was originally built locally using Python 3.11.2.
+This project uses [uv](https://docs.astral.sh/uv/) for dependency
+management and [ruff](https://docs.astral.sh/ruff/) for linting
+and formatting.
 
-GitHub only supports up to Python 3.10 in their workflows…
+## Additional Documentation
+
+The conversion from pip to uv and ruff was done using Antigravity IDE using Claue Opus 4.6. See:
+
+- [Implementation Plan](docs/implementation_plan.md)
+- [Walkthrough](docs/walkthrough.md)
+- [Task](docs/task.md)
 
 ## Resources
 
 Python documentation is
-[here](https://frankhjung.github.io/python-copilot-demo/).
+[frankhjung.github.io/python-copilot-demo](https://frankhjung.github.io/python-copilot-demo/).
 
 Software used in this project:
 
-* [Alpha Vantage API](https://www.alphavantage.co/documentation/)
-* [Black](https://black.readthedocs.io/en/stable/)
-* [Flake8](https://flake8.pycqa.org/en/latest/)
-* [isort](https://pycqa.github.io/isort/)
-* [Make](https://www.gnu.org/software/make/)
-* [Matplotlib](https://matplotlib.org/)
-* [Pandas](https://pandas.pydata.org/)
-* [PyDoc](https://pypi.org/project/pdoc/)
-* [PyLint](https://www.pylint.org/)
-* [PyTest](https://docs.pytest.org/en/stable/)
-* [Python](https://python.org)
-* [sort-requirements](https://pypi.org/project/sort-requirements/)
+- [Alpha Vantage API](https://www.alphavantage.co/documentation/)
+- [Bandit](https://bandit.readthedocs.io/en/latest/)
+- [Make](https://www.gnu.org/software/make/)
+- [Matplotlib](https://matplotlib.org/)
+- [Pandas](https://pandas.pydata.org/)
+- [pdoc](https://pypi.org/project/pdoc/)
+- [PyTest](https://docs.pytest.org/en/stable/)
+- [Python](https://python.org)
+- [Ruff](https://docs.astral.sh/ruff/)
+- [uv](https://docs.astral.sh/uv/)
 
 ## Other Tools
 
-* [GitHub Copilot Labs](https://githubnext.com/projects/copilot-labs) provides
-  additional Copilot features, including explain code, translate code, and write
-  unit tests
+- [GitHub Copilot Labs](https://githubnext.com/projects/copilot-labs)
+  provides additional Copilot features, including explain code,
+  translate code, and write unit tests
 
-* [OpenAI playground](https://platform.openai.com/playground) is a research
-  project to experiment with different pre-trained AI models developed by OpenAI
-  in natural language processing (NLP), computer vision, and other AI domains
+- [OpenAI playground](https://platform.openai.com/playground) is a
+  research project to experiment with different pre-trained AI
+  models developed by OpenAI in natural language processing (NLP),
+  computer vision, and other AI domains
 
-  * The [other](./other) directory contains example code where Copilot was used
-    to write a Python script, then Labs was used to translate into Ruby.
+  - The [other](./other) directory contains example code where
+    Copilot was used to write a Python script, then Labs was used
+    to translate into Ruby.
 
-* [Hugging Face StarCoder](https://huggingface.co/blog/starcoder) is a LLM model
-  released by Hugging Face specifically for code generation.
+- [Hugging Face StarCoder](https://huggingface.co/blog/starcoder)
+  is a LLM model released by Hugging Face specifically for code
+  generation.
 
-* [Hugging Face Code Search](https://huggingface.co/spaces/bigcode/search) is a
-  search engine for code, trained on 2.8M Python files from GitHub.
+- [Hugging Face Code Search](https://huggingface.co/spaces/bigcode/search)
+  is a search engine for code, trained on 2.8M Python files from
+  GitHub.

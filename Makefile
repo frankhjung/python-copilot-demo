@@ -3,11 +3,7 @@
 .PHONY: all badge clean default doc format help lint preen report run tags test
 
 .DEFAULT_GOAL	:= default
-CODE_COVERAGE	:= 90	# minimum percentage for code coverage
 CTAGS		:= $(shell which ctags)
-LINE_LENGTH	:= 79	# PEP-8 standards ensure styling tools use this too
-PIP		:= $(shell which pip3)
-PYTHON		:= $(shell which python3)
 RM		:= rm -rf
 
 PROJECT		:= quotes
@@ -22,34 +18,27 @@ help:
 	@echo
 	@echo "  all:    style and test"
 	@echo "  preen:  format and lint"
-	@echo "  format: format code, sort imports and requirements"
+	@echo "  format: format code and sort imports"
 	@echo "  lint:   check code"
 	@echo "  test:   run unit tests"
 	@echo "  doc:    document module"
 	@echo "  clean:  delete all generated files"
 	@echo
-	@echo "Initialise virtual environment (.venv) with:"
+	@echo "Initialise virtual environment with:"
 	@echo
-	@echo "  pip3 install -U virtualenv; python3 -m virtualenv .venv; source .venv/bin/activate; pip3 install -Ur requirements.txt"
+	@echo "  uv sync"
 	@echo
-	@echo "Start virtual environment (.venv) with:"
+	@echo "Run a command in the virtual environment with:"
 	@echo
-	@echo "  source .venv/bin/activate"
-	@echo
-	@echo Deactivate with:
-	@echo
-	@echo "  deactivate"
+	@echo "  uv run <command>"
 	@echo
 
 preen:	format tags lint
 
 format:
-	# sort imports
-	@isort --line-length $(LINE_LENGTH) --profile black $(PROJECT)
-	# format code to googles style
-	@black --line-length $(LINE_LENGTH) $(PROJECT)
-	# sort requirements
-	@sort-requirements requirements.txt
+	# format code and sort imports
+	@uv run ruff format $(SRCS)
+	@uv run ruff check --fix --select I $(SRCS)
 
 tags:
 ifdef CTAGS
@@ -58,51 +47,48 @@ ifdef CTAGS
 endif
 
 lint:
-	# check with flake8
-	@flake8 $(PROJECT)
-	# lint with pylint
-	@pylint $(PROJECT)
+	# check with ruff
+	@uv run ruff check $(PROJECT)
 	# security checks with bandit
-	@bandit --configfile .bandit.yaml --recursive $(PROJECT)
+	@uv run bandit --configfile pyproject.toml --recursive $(PROJECT)
 
 test:
 	# unit tests with coverage report
-	@pytest --verbose --cov --cov-report=html \
-	  --self-contained-html --html=public/pytest_report.html
+	@uv run pytest --verbose --cov --cov-report=html \
+	  --html=public/pytest_report.html
 
 report:	doc badge
 
 doc:
-	# generate documentation and public directory
-	@pdoc --output-directory public $(PROJECT)
-	@bandit --configfile .bandit.yaml --recursive \
+	# generate documentation to public directory
+	@uv run pdoc --output-directory public $(PROJECT)
+	@uv run bandit --configfile pyproject.toml --recursive \
 	  --format html --output public/bandit_report.html $(PROJECT)
-	@pylint $(PROJECT) --exit-zero --load-plugins=pylint_report \
-	  --output-format=pylint_report.CustomJsonReporter:public/pylint_report.json
-	@pylint_report -o public/pylint_report.html public/pylint_report.json
 
 badge:
 	# generate badges
-	# flake8
-	@flake8 --statistics --exit-zero --format=html --htmldir public/flake8 \
-	  --output-file public/flake8stats.txt $(PROJECT)
-	@genbadge flake8 --input-file public/flake8stats.txt \
-	  --output-file public/flake8.svg
-	# pylint
-	@$(RM) public/pylint.svg
-	@anybadge \
-	  --value=$(shell pylint $(PROJECT) | sed -n 's/^Your code has been rated at \([^\/]*\).*/\1/p') \
-	  --file=public/pylint.svg \
-	  --label pylint
+	# ruff
+	@uv run ruff check --exit-zero --output-format json \
+	  --output-file public/ruff_report.json $(PROJECT)
+	@uv run python -c "\
+	  import json, sys; \
+	  data = json.load(open('public/ruff_report.json')); \
+	  count = len(data); \
+	  print(f'ruff: {count} issues'); \
+	  import anybadge; \
+	  badge = anybadge.Badge('ruff', \
+	    value='pass' if count == 0 else f'{count} issues', \
+	    default_color='green' if count == 0 else 'orange'); \
+	  badge.write_badge('public/ruff.svg', overwrite=True)"
 	# pytest
-	@pytest --junitxml=public/pytest_report.xml
-	@genbadge tests \
+	@uv run pytest --junitxml=public/pytest_report.xml
+	@uv run genbadge tests \
 	  --input-file public/pytest_report.xml \
 	  --output-file public/tests.svg
 
 run:
 	# get quotes for microsoft
-	@$(PYTHON) get_weekly_quotes.py MSFT
+	@uv run python get_weekly_quotes.py MSFT
 
 clean:
 	# clean generated artefacts
@@ -110,12 +96,13 @@ clean:
 	$(RM) .coverage
 	$(RM) .hypothesis/
 	$(RM) .pytest_cache/
+	$(RM) .ruff_cache/
 	$(RM) public/
 	$(RM) tags
+	$(RM) tests/__pycache__/
 
 distclean: clean
 	# clean development environment
 	$(RM) .idea/
 	$(RM) .venv/
 	$(RM) .vscode/
-

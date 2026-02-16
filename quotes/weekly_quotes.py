@@ -1,7 +1,5 @@
 """Retreive weekly quotes and plot."""
 
-from typing import Dict
-
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -9,13 +7,13 @@ import pandas as pd
 class WeeklyQuotes:
     """Custom class to hold weekly quotes."""
 
-    def __init__(self, data: Dict[str, Dict[str, float]]):
+    def __init__(self, data: dict[str, dict[str, float]]):
         """Initialize the class."""
         self.data = data
         self.quotes = self.get_weekly_quotes()
         self.quotes_df = self.as_dataframe()
 
-    def get_weekly_quotes(self) -> Dict[str, float]:
+    def get_weekly_quotes(self) -> dict[str, float]:
         """Get weekly quotes for a symbol returned by the Alpha Vantage API.
 
         Returns

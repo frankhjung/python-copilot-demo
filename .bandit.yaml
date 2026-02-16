@@ -1,5 +1,0 @@
-# bandit https://bandit.readthedocs.io/en/latest/config.html
-exclude_dirs: ['quotes/tests']
-# ignore
-# - https://bandit.readthedocs.io/en/latest/plugins/b101_assert_used.html
-skips: ['B101']

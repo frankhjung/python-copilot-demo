@@ -1,7 +1,5 @@
 """Test weekly_alpha_vantage module."""
 
-from typing import Dict
-
 import pandas as pd
 import pytest as pt
 
@@ -9,11 +7,13 @@ import quotes.weekly_quotes as wq
 
 
 @pt.fixture(scope="module", name="mock_quotes")
-def fixture_mock_quotes() -> Dict[str, Dict[str, float]]:
+def fixture_mock_quotes() -> dict[str, dict[str, float]]:
     """Fixture: Mock weekly quotes."""
     return {
         "Meta Data": {
-            "1. Information": "Weekly Prices (open, high, low, close) and Volumes",
+            "1. Information": (
+                "Weekly Prices (open, high, low, close) and Volumes"
+            ),
             "2. Symbol": "MSFT",
             "3. Last Refreshed": "2023-03-21",
             "4. Time Zone": "US/Eastern",
@@ -47,7 +47,7 @@ def fixture_expected_df() -> pd.DataFrame:
 
 
 def test_convert_to_dataframe(
-    mock_quotes: Dict[str, float], expected_df: pd.DataFrame
+    mock_quotes: dict[str, float], expected_df: pd.DataFrame
 ) -> None:
     """Get weekly time series and convert to dataframe."""
     quotes = wq.WeeklyQuotes(mock_quotes)  # type: ignore

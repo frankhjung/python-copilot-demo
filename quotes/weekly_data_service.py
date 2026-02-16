@@ -3,7 +3,6 @@
 # pylint: disable=too-few-public-methods
 
 from abc import ABC, abstractmethod
-from typing import Dict
 
 
 class WeeklyDataService(ABC):
@@ -17,7 +16,7 @@ class WeeklyDataService(ABC):
     """
 
     @abstractmethod
-    def retrieve_weekly_data(self, symbol: str) -> Dict[str, Dict[str, float]]:
+    def retrieve_weekly_data(self, symbol: str) -> dict[str, dict[str, float]]:
         """
         Abstract class to get weekly quotes for a symbol.
 

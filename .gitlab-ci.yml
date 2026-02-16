@@ -1,9 +1,9 @@
 ---
-
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    # if already in a merge request pipeline then don't add to branch pipeline
+    # if already in a merge request pipeline then don't add to
+    # branch pipeline
     - if: $CI_OPEN_MERGE_REQUESTS
       when: never
     # if no open merge request then add to branch pipeline
@@ -14,51 +14,45 @@ stages:
   - deploy
 
 validate:
-  image: python:3.11-slim
+  image: python:3.13-slim
   stage: validate
   variables:
     PROJECT: quotes
   before_script:
-    - pip install virtualenv
-    - virtualenv .venv
-    - source .venv/bin/activate
-    - pip install --upgrade --requirement requirements.txt
-    - python --version
-    - pip --version
-    - virtualenv --version
-    - pip list --local
+    - pip install uv
+    - uv sync
+    - uv run python --version
+    - uv run ruff version
   script:
-    # check source code formatting
-    - isort --check --line-length 79 --diff --profile black ${PROJECT}
-    - black --check --line-length 79 ${PROJECT}
-    - sort-requirements --check requirements.txt
-    # pdoc creates the public directory
-    - pdoc --output-directory public ${PROJECT}
-    # unit tests and coverage
-    - pytest
-        --cov --cov-report=html --cov-report=xml
-        --html=public/pytest_report.html --self-contained-html
-        --junitxml=public/pytest_report.xml
-    - genbadge tests
-        --input-file public/pytest_report.xml
-        --output-file public/tests.svg
+    # check source code formatting and linting
+    - uv run ruff check ${PROJECT}
+    - uv run ruff format --check ${PROJECT}
     # security checks
-    - bandit --configfile .bandit.yaml --recursive
-        --format html --output public/bandit_report.html ${PROJECT}
-    # static analysis
-    - flake8 --statistics --exit-zero --format=html --htmldir public/flake8
-        --output-file public/flake8stats.txt ${PROJECT}
-    - genbadge flake8
-        --input-file public/flake8stats.txt
-        --output-file public/flake8.svg
-    - pylint ${PROJECT} --exit-zero --load-plugins=pylint_report
-        --output-format=pylint_report.CustomJsonReporter:public/pylint_report.json
-    - pylint_report
-        -o public/pylint_report.html public/pylint_report.json
+    - uv run bandit --configfile pyproject.toml --recursive
+      --format html --output public/bandit_report.html
+      ${PROJECT}
+    # pdoc creates the public directory
+    - uv run pdoc --output-directory public ${PROJECT}
+    # unit tests and coverage
+    - uv run pytest
+      --cov --cov-report=html --cov-report=xml
+      --html=public/pytest_report.html
+      --junitxml=public/pytest_report.xml
+    - uv run genbadge tests
+      --input-file public/pytest_report.xml
+      --output-file public/tests.svg
+    # ruff badge
+    - uv run ruff check --exit-zero --output-format json
+      --output-file public/ruff_report.json ${PROJECT}
     # yamllint disable-line rule:line-length
-    - CODE=$(pylint ${PROJECT} | sed -n 's/^Your code has been rated at \([^\/]*\).*/\1/p')
-    - anybadge --label=pylint
-        --value=${CODE} --file=public/pylint.svg
+    - uv run python -c "
+      import json, anybadge;
+      data = json.load(open('public/ruff_report.json'));
+      count = len(data);
+      badge = anybadge.Badge('ruff',
+      value='pass' if count == 0 else f'{count} issues',
+      default_color='green' if count == 0 else 'orange');
+      badge.write_badge('public/ruff.svg', overwrite=True)"
   coverage: /(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/
   artifacts:
     paths:
