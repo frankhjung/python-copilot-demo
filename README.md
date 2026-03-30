@@ -1,15 +1,13 @@
 # Read Stock Quotes Example
 
-Use GitHub Copilot to write a small Python program to demonstrate
-how to read stock quotes using the
-[Alpha Vantage](https://www.alphavantage.co/) API.
+Use GitHub Copilot to write a small Python program to demonstrate how to read
+stock quotes using the [Alpha Vantage](https://www.alphavantage.co/) API.
 
 ## Quick Start
 
 ### Prerequisites
 
-- [uv](https://docs.astral.sh/uv/) — Python package and project
-  manager
+- [uv](https://docs.astral.sh/uv/) — Python package and project manager
 
 ### Setup
 
@@ -37,6 +35,7 @@ make test       # run unit tests with coverage
 make doc        # generate documentation
 
 make run        # get quotes for MSFT
+make update     # check for and sync package updates
 make clean      # remove generated artefacts
 ```
 
@@ -53,8 +52,7 @@ uv run python get_weekly_quotes.py MSFT
 1. call Alpha Vantage API to get stock quotes
 1. store stock quotes to a Pandas dataframe
 1. print to console
-1. plot stock quotes to a chart (closing price by date)
-   using Matplotlib
+1. plot stock quotes to a chart (closing price by date) using Matplotlib
 
 ## Example
 
@@ -86,13 +84,13 @@ Compare with Google Finance:
 
 ## Build
 
-This project uses [uv](https://docs.astral.sh/uv/) for dependency
-management and [ruff](https://docs.astral.sh/ruff/) for linting
-and formatting.
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management and
+[ruff](https://docs.astral.sh/ruff/) for linting and formatting.
 
 ## Additional Documentation
 
-The conversion from pip to uv and ruff was done using Antigravity IDE using Claue Opus 4.6. See:
+The conversion from pip to uv and ruff was done using Antigravity IDE using
+Claue Opus 4.6. See:
 
 - [Implementation Plan](docs/implementation_plan.md)
 - [Walkthrough](docs/walkthrough.md)
@@ -122,14 +120,12 @@ Software used in this project:
   provides additional Copilot features, including explain code,
   translate code, and write unit tests
 
-- [OpenAI playground](https://platform.openai.com/playground) is a
-  research project to experiment with different pre-trained AI
-  models developed by OpenAI in natural language processing (NLP),
-  computer vision, and other AI domains
+- [OpenAI playground](https://platform.openai.com/playground) is a research
+  project to experiment with different pre-trained AI models developed by OpenAI
+  in natural language processing (NLP), computer vision, and other AI domains
 
-  - The [other](./other) directory contains example code where
-    Copilot was used to write a Python script, then Labs was used
-    to translate into Ruby.
+  - The [other](./other) directory contains example code where Copilot was used
+    to write a Python script, then Labs was used to translate into Ruby.
 
 - [Hugging Face StarCoder](https://huggingface.co/blog/starcoder)
   is a LLM model released by Hugging Face specifically for code
