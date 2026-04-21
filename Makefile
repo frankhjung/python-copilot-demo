@@ -70,7 +70,10 @@ run: ## run the application
 update: ## check for and sync package updates
 	# check for outdated packages
 	@uv pip list --outdated
-	@uv sync --upgrade
+	# update uv.lock, then sync the environment to the locked versions
+	@uv lock --upgrade
+	@uv sync
+	@uv tree
 
 clean: ## clean generated artefacts
 	# clean generated artefacts

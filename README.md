@@ -35,8 +35,26 @@ make test       # run unit tests with coverage
 make doc        # generate documentation
 
 make run        # get quotes for MSFT
-make update     # check for and sync package updates
+make update     # check for updates, refresh uv.lock, and sync
 make clean      # remove generated artefacts
+```
+
+`make update` runs `uv pip list --outdated`, then `uv lock --upgrade` to refresh
+[uv.lock](uv.lock), and finally `uv sync` to install the locked versions into
+the virtual environment.
+
+### List Packages
+
+List packages in the virtual environment:
+
+```bash
+uv pip list
+```
+
+Another command is `uv tree` to show the dependency tree:
+
+```bash
+uv tree
 ```
 
 ### Running Directly
