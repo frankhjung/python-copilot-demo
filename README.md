@@ -41,7 +41,8 @@ make clean      # remove generated artefacts
 
 `make update` runs `uv pip list --outdated`, then `uv lock --upgrade` to refresh
 [uv.lock](uv.lock), and finally `uv sync` to install the locked versions into
-the virtual environment.
+the virtual environment. See [Updating Packages](#updating-packages) for
+details.
 
 ### List Packages
 
@@ -61,6 +62,49 @@ uv tree
 
 ```bash
 uv run python get_weekly_quotes.py MSFT
+```
+
+## Updating Packages
+
+To keep dependencies up to date, upgrade packages using either the `Makefile`
+target or direct `uv` commands.
+
+### Using Make
+
+Run the `update` target to check for outdated packages, upgrade all
+dependencies in [uv.lock](uv.lock), and sync the virtual environment:
+
+```bash
+make update
+```
+
+This target executes the following sequence:
+
+1. `uv pip list --outdated` — displays packages with newer versions
+2. `uv lock --upgrade` — updates [uv.lock](uv.lock) with latest versions
+3. `uv sync` — installs the upgraded packages into the virtual environment
+4. `uv tree` — displays the updated dependency tree
+
+### Using uv Commands Directly
+
+To check for available updates without modifying files:
+
+```bash
+uv pip list --outdated
+```
+
+To upgrade all dependencies to their latest compatible versions:
+
+```bash
+uv lock --upgrade
+uv sync
+```
+
+To upgrade a specific package to its latest version:
+
+```bash
+uv lock --upgrade-package <package_name>
+uv sync
 ```
 
 ## Method
