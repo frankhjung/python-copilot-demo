@@ -41,6 +41,9 @@ indent-style = "space"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--verbose --cov=quotes --cov-report=html"
+filterwarnings = [
+  "ignore:unclosed database in <sqlite3\\.Connection:ResourceWarning",
+]
 
 [tool.coverage.paths]
 source = ["quotes/"]
